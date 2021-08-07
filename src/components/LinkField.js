@@ -5,9 +5,11 @@ const LinkField = ({ setLink }) => {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		const input = inputRef.current.value;
-		setLink(input);
-		inputRef.current.value = "";
+		if (inputRef.current.value) {
+			const input = inputRef.current.value;
+			setLink(input);
+			inputRef.current.value = "";
+		}
 	};
 
 	const handlePaste = (e) => {
