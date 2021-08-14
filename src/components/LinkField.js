@@ -1,12 +1,12 @@
 import React, { useRef } from "react";
-
+import { v4 as uuidv4 } from "uuid";
 const LinkField = ({ setLink }) => {
 	const inputRef = useRef("");
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		if (inputRef.current.value) {
-			const input = inputRef.current.value;
+			const input = { id: uuidv4(), link: inputRef.current.value };
 			setLink(input);
 			inputRef.current.value = "";
 		}

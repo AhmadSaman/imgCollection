@@ -1,11 +1,12 @@
 import React from "react";
+import Img from "./Img";
 
-const ImgGrid = () => {
+const ImgGrid = ({ imgs }) => {
 	return (
-		<div>
-			<h1 className="text-2xl text-center text-purple-500">
-				HI I'm Image Grid Component
-			</h1>
+		<div className="flex w-10/12 m-auto flex-wrap">
+			{imgs.map((img) => (
+				<Img key={img.id} img={img} />
+			))}
 		</div>
 	);
 };
