@@ -1,9 +1,10 @@
 import React from "react";
 
-const Img = () => {
+const Img = ({ img }) => {
+	console.log(img);
 	return (
-		<div>
-			<h1 className="text-7xl text-center"></h1>
+		<div className="lg:w-1/3 md:w-full animate-fade-in-down">
+			<img src={img.link} alt="img" />
 		</div>
 	);
 };
