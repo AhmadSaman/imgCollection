@@ -1,12 +1,15 @@
 import React from "react";
 import { useTransition, useSpring, animated } from "react-spring";
-const Img = ({ img }) => {
+const Img = ({ img, deleteItem }) => {
 	const [{ y }, set] = useSpring(() => ({ y: 100 }));
 	const transition = useTransition(img, {
-		from: { x: 0, y: 25, opacity: 0 },
+		from: { x: 0, y: 10, opacity: 0 },
 		enter: { x: 0, y: 0, opacity: 1 },
 		leave: {},
 	});
+	function handleDelete() {
+		deleteItem(img.id);
+	}
 	return (
 		<div>
 			{transition((style, img) => (
@@ -23,7 +26,7 @@ const Img = ({ img }) => {
 						}}
 						className="glance flex flex-row justify-center items-center border-2 rounded"
 					>
-						<button>
+						<button onClick={handleDelete}>
 							<svg
 								xmlns="http://www.w3.org/2000/svg"
 								className="w-28 h-32 transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110"
