@@ -14,7 +14,7 @@ function App() {
 	return (
 		<div className="App">
 			<LinkField setLink={setLink} />
-			<ImgGrid imgs={linkObj} />
+			<ImgGrid imgs={linkObj} onDelete={setLinkObj} />
 		</div>
 	);
 }
