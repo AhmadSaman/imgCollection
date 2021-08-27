@@ -1,21 +1,22 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import ImgGrid from "./components/ImgGrid";
 import LinkField from "./components/LinkField";
 import useLocalStorage from "./useLocalStorage";
 
 function App() {
-	const [link, setLink] = useState();
 	const [linkObj, setLinkObj] = useLocalStorage("imgs", []);
 
-	useEffect(() => {
-		if (link) {
-			setLinkObj((arr) => [...arr, link]);
-		}
-	}, [link]);
-
+	// useEffect(() => {
+	// 	if (link) {
+	// 		setLinkObj((arr) => [...arr, link]);
+	// 	}
+	// }, [link]);
+	function addLink(newLink) {
+		setLinkObj((arr) => [...arr, newLink]);
+	}
 	return (
 		<div className="App">
-			<LinkField setLink={setLink} />
+			<LinkField onAdd={addLink} />
 			<ImgGrid imgs={linkObj} onDelete={setLinkObj} />
 		</div>
 	);

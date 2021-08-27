@@ -1,7 +1,8 @@
 import React from "react";
+
 import { useTransition, useSpring, animated } from "react-spring";
 const Img = ({ img, deleteItem }) => {
-	const [{ y }, set] = useSpring(() => ({ y: 100 }));
+	const [{ y }, start] = useSpring(() => ({ y: 100 }));
 	const transition = useTransition(img, {
 		from: { x: 0, y: 10, opacity: 0 },
 		enter: { x: 0, y: 0, opacity: 1 },
@@ -10,19 +11,26 @@ const Img = ({ img, deleteItem }) => {
 	function handleDelete() {
 		deleteItem(img.id);
 	}
+
 	return (
 		<div>
 			{transition((style, img) => (
 				<animated.div
-					onMouseEnter={() => set({ y: 0 })}
-					onMouseLeave={() => set({ y: 100 })}
+					onMouseEnter={() => start({ y: 0 })}
+					onMouseLeave={() => start({ y: 100 })}
 					className="overflow-hidden relative hover:shadow-md rounded"
 					style={style}
 				>
-					<animated.img src={img.link} alt="img" />
+					<animated.img
+						src={img.link}
+						alt="img"
+						onError={() => {
+							handleDelete(img.id);
+						}}
+					/>
 					<animated.div
 						style={{
-							transform: y.interpolate((v) => `translateY(${v}%`),
+							transform: y.to((v) => `translateY(${v}%`),
 						}}
 						className="glance flex flex-row justify-center items-center border-2 rounded"
 					>
